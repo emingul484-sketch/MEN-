@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BATTALBEY | Cengiz Topel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #a80000; 
+            --secondary: #121212; 
+            --bg: #fdfdfd; 
+            --card-bg: #ffffff;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg); margin: 0; padding-bottom: 120px; }
+
+        /* --- HEADER --- */
+        .top-header { text-align: center; padding: 30px 20px; background: #fff; border-bottom: 4px solid var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .brand-name { font-size: 1.8rem; font-weight: 900; color: var(--primary); text-transform: uppercase; letter-spacing: -1px; display: block; }
+        .sub-title { font-size: 0.85rem; color: #555; font-weight: 700; margin-top: 5px; display: block; }
+
+        /* --- GRID --- */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px; }
+        .cat-card { 
+            background: var(--card-bg); border-radius: 20px; padding: 15px; text-align: center; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: transform 0.2s;
+        }
+        .cat-card:active { transform: scale(0.95); }
+        .cat-img { width: 90%; height: 80px; object-fit: contain; margin-bottom: 10px; }
+        .cat-card span { font-size: 0.75rem; font-weight: 800; color: var(--secondary); text-transform: uppercase; }
+
+        /* --- DETAY EKRANI --- */
+        #detail-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 2000; overflow-y: auto; padding-bottom: 100px; }
+        .detail-header { position: sticky; top: 0; background: var(--primary); color: #fff; padding: 15px; display: flex; align-items: center; z-index: 2100; font-weight: 700; }
+        .back-btn { font-size: 1.5rem; border: none; background: none; color: #fff; margin-right: 15px; cursor: pointer; }
+
+        /* --- ÜRÜN LİSTESİ --- */
+        .item { padding: 15px; border-bottom: 1px solid #eee; display: flex; align-items: center; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .item img { width: 85px; height: 85px; border-radius: 12px; object-fit: cover; margin-right: 15px; background: #f0f0f0; }
+        .item-info { flex: 1; }
+        .item h3 { margin: 0 0 5px; font-size: 0.9rem; font-weight: 700; color: var(--secondary); }
+        .item p { margin: 0; font-size: 0.7rem; color: #777; line-height: 1.3; }
+        .item-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+        .price { color: var(--primary); font-weight: 800; font-size: 1.1rem; }
+        .add-btn { background: var(--primary); color: #fff; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; }
+
+        /* --- NAV & CART --- */
+        #cart-bar { position: fixed; bottom: 85px; left: 15px; right: 15px; background: var(--secondary); color: #fff; padding: 15px; border-radius: 15px; display: none; justify-content: space-between; align-items: center; z-index: 3000; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .nav { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; justify-content: space-around; padding: 12px; border-top: 1px solid #eee; z-index: 4000; }
+        .nav-item { text-align: center; color: #aaa; font-size: 0.7rem; text-decoration: none; font-weight: 600; }
+        .nav-item.active { color: var(--primary); }
+        .nav-item i { font-size: 1.3rem; display: block; margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+    <div id="home-screen">
+        <div class="top-header">
+            <span class="brand-name">BATTALBEY</span>
+            <span class="sub-title">CENGİZ TOPEL ŞUBESİ</span>
+        </div>
+        
+        <div class="grid">
+            <div class="cat-card" onclick="openCat('durumler')">
+                <img src="https://img.icons8.com/emoji/96/burrito-emoji.png" class="cat-img">
+                <span>DÜRÜMLER</span>
+            </div>
+            <div class="cat-card" onclick="openCat('porsiyonlar')">
+                <img src="https://img.icons8.com/emoji/96/curry-rice.png" class="cat-img">
+                <span>PORSİYONLAR</span>
+            </div>
+            <div class="cat-card" onclick="openCat('menuler')">
+                <img src="https://img.icons8.com/emoji/96/star-emoji.png" class="cat-img">
+                <span>MENÜLER</span>
+            </div>
+            <div class="cat-card" onclick="openCat('icecekler')">
+                <img src="https://img.icons8.com/emoji/96/cup-with-straw-emoji.png" class="cat-img">
+                <span>İÇECEKLER</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="detail-screen">
+        <div class="detail-header">
+            <button class="back-btn" onclick="closeCat()"><i class="fas fa-arrow-left"></i></button>
+            <span id="cat-title">MENÜ</span>
+        </div>
+        <div id="item-list"></div>
+    </div>
+
+    <div id="cart-bar">
+        <span id="cart-count">0 Ürün</span>
+        <span id="cart-total" style="font-weight: 800;">0₺</span>
+    </div>
+
+    <div class="nav">
+        <div class="nav-item active" onclick="closeCat()"><i class="fas fa-utensils"></i>Menü</div>
+        <a href="https://wa.me/905368940942" class="nav-item"><i class="fab fa-whatsapp"></i>Sipariş</a>
+        <a href="#" class="nav-item"><i class="fas fa-map-marker-alt"></i>Konum</a>
+    </div>
+
+    <script>
+        // Ürün Resimleri için yer tutucu (Eğer kendi resimlerin varsa buraya dosya adlarını yazabilirsin)
+        const placeholder = "https://via.placeholder.com/150?text=Battalbey";
+
+        const data = {
+            durumler: [
+                {n:"Öğrenci Dürüm (80g)", d:"Marul, nane, maydanoz, turşu, soslar", p:"70₺", i: "durum.jpg"},
+                {n:"Normal Dürüm (100g)", d:"Battalbey özel çiğköfte lezzeti", p:"85₺", i: "durum.jpg"},
+                {n:"Double Dürüm (120g)", d:"Çift lavaş, bol malzeme", p:"95₺", i: "durum.jpg"},
+                {n:"Mega Dürüm (150g)", d:"En doyurucu dürüm seçeneği", p:"110₺", i: "durum.jpg"},
+                {n:"Doritoslu Normal", d:"Doritos Taco ile çıtır lezzet", p:"95₺", i: "doritos.jpg"},
+                {n:"Doritoslu Mega", d:"150g çiğköfte ve bol Doritos", p:"115₺", i: "doritos.jpg"}
+            ],
+            porsiyonlar: [
+                {n:"Porsiyon (200g)", d:"Lavaş ve garnitür ile", p:"160₺", i: "porsiyon.jpg"},
+                {n:"Double Porsiyon (400g)", d:"Geniş porsiyon seçeneği", p:"230₺", i: "porsiyon.jpg"},
+                {n:"1 Kilo Porsiyon", d:"Tüm garnitür ve soslar dahil", p:"475₺", i: "kilo.jpg"}
+            ],
+            menuler: [
+                {n:"Öğrenci Menü", d:"Dürüm (100g) + Küçük Ayran", p:"120₺", i: "menu.jpg"},
+                {n:"Kola Menü", d:"Dürüm (100g) + Kola", p:"115₺", i: "menu.jpg"},
+                {n:"Ciğer Menü", d:"Ciğer Lavaş + Açık Ayran", p:"110₺", i: "ciger.jpg"}
+            ],
+            icecekler: [
+                {n:"Yayık Ayran", d:"Bol köpüklü", p:"20₺", i: "ayran.jpg"},
+                {n:"Şalgam Suyu", d:"Acılı / Acısız", p:"30₺", i: "salgam.jpg"},
+                {n:"Kola Çeşitleri", d:"Siyah / Sarı", p:"40₺", i: "kola.jpg"}
+            ]
+        };
+
+        let total = 0;
+        let count = 0;
+
+        function openCat(cat) {
+            const list = document.getElementById('item-list');
+            list.innerHTML = '';
+            document.getElementById('cat-title').innerText = cat.replace('_',' ').toUpperCase();
+            
+            data[cat].forEach(item => {
+                list.innerHTML += `
+                    <div class="item">
+                        <img src="${item.i}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081093.png'">
+                        <div class="item-info">
+                            <h3>${item.n}</h3>
+                            <p>${item.d}</p>
+                            <div class="item-footer">
+                                <div class="price">${item.p}</div>
+                                <div class="add-btn" onclick="add('${item.p}')">+</div>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+            document.getElementById('detail-screen').style.display = 'block';
+        }
+
+        function closeCat() { document.getElementById('detail-screen').style.display = 'none'; }
+
+        function add(p) {
+            total += parseInt(p);
+            count++;
+            document.getElementById('cart-bar').style.display = 'flex';
+            document.getElementById('cart-count').innerText = count + ' Ürün';
+            document.getElementById('cart-total').innerText = total + '₺';
+        }
+    </script>
+</body>
+</html>
