@@ -9,16 +9,17 @@
     <style>
         :root { --primary: #e60000; --dark: #0f0f0f; --bg: #ffffff; }
 
-        /* Mobil Sabitleme: Sağa sola kaymayı engeller */
+        /* Mobil Sabitleme: Yatay kaymayı %100 engeller */
         html, body { 
             max-width: 100%; 
             overflow-x: hidden; 
             margin: 0; 
             padding: 0; 
             background-color: #fdfdfd;
+            height: 100%;
         }
 
-        body { font-family: 'Montserrat', sans-serif; padding-bottom: 120px; color: var(--dark); }
+        body { font-family: 'Montserrat', sans-serif; padding-bottom: 140px; color: var(--dark); }
 
         /* --- HEADER --- */
         .top-header { 
@@ -27,12 +28,13 @@
             border-bottom-left-radius: 30px; border-bottom-right-radius: 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
-        .brand-logo { width: 85px; margin-bottom: 5px; }
-        .brand-name { font-size: 1.6rem; font-weight: 900; color: var(--primary); letter-spacing: -1px; }
+        .brand-logo { width: 85px; margin-bottom: 10px; }
+        .brand-name { font-size: 1.6rem; font-weight: 900; color: var(--primary); letter-spacing: -1px; margin: 0; }
+        .branch-name { font-size: 0.8rem; font-weight: 700; color: #666; margin-top: 5px; }
 
         /* --- KATEGORİ LİSTESİ --- */
-        .section-title { padding: 20px; font-weight: 900; color: #333; font-size: 1rem; }
-        .grid { display: flex; flex-direction: column; gap: 15px; padding: 0 15px; }
+        .section-title { padding: 20px 20px 10px; font-weight: 900; color: #333; font-size: 1.1rem; }
+        .grid { display: flex; flex-direction: column; gap: 12px; padding: 0 15px; }
         
         .cat-card { 
             background: #fff; border-radius: 20px; padding: 15px; 
@@ -42,81 +44,83 @@
         }
         .cat-card:active { transform: scale(0.98); background: #fff8f8; }
 
-        /* DÜRÜMLER başlığının üstündeki görsel */
+        /* DÜRÜMLER başlığının üzerindeki görsel */
         .cat-main-img { 
-            width: 100%; max-width: 280px; height: 140px; 
-            border-radius: 15px; object-fit: cover; margin-bottom: 10px;
-            background: #eee;
+            width: 100%; height: 160px; 
+            border-radius: 15px; object-fit: cover; margin-bottom: 15px;
+            background: #f0f0f0;
         }
-        .cat-card span { font-size: 1rem; font-weight: 800; color: var(--primary); }
+        .cat-card span { font-size: 1rem; font-weight: 900; color: var(--primary); }
 
-        /* Diğer küçük kategoriler için yatay stil */
+        /* Diğer kategoriler için yatay stil */
         .cat-card-small {
-            flex-direction: row; justify-content: space-between; padding: 12px 20px;
+            flex-direction: row; justify-content: space-between; padding: 15px 20px;
         }
+        .cat-card-small span { color: var(--dark); }
 
-        /* --- ÜRÜN EKRANI (AŞAĞI YUKARI KAYAR) --- */
+        /* --- ÜRÜN EKRANI --- */
         #detail-screen { 
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: #fff; z-index: 2000; overflow-y: auto; overflow-x: hidden;
-            -webkit-overflow-scrolling: touch; /* iOS için akıcı kaydırma */
+            -webkit-overflow-scrolling: touch;
         }
-        .detail-header { position: sticky; top: 0; background: var(--primary); color: #fff; padding: 15px; display: flex; align-items: center; z-index: 2100; font-weight: 800; }
+        .detail-header { position: sticky; top: 0; background: var(--primary); color: #fff; padding: 18px; display: flex; align-items: center; z-index: 2100; font-weight: 800; }
         .back-btn { font-size: 1.5rem; border: none; background: none; color: #fff; margin-right: 15px; }
 
-        .item { padding: 15px; border-bottom: 1px solid #f5f5f5; display: flex; align-items: center; width: 100%; }
-        .item img { width: 75px; height: 75px; border-radius: 12px; object-fit: cover; margin-right: 15px; border: 1px solid #eee; }
+        .item { padding: 15px 20px; border-bottom: 1px solid #f5f5f5; display: flex; align-items: center; width: 100%; }
+        .item img { width: 80px; height: 80px; border-radius: 15px; object-fit: cover; margin-right: 15px; border: 1px solid #eee; background: #fafafa; }
         .item-info { flex: 1; }
-        .item h3 { margin: 0; font-size: 0.9rem; font-weight: 800; }
-        .price { color: var(--primary); font-weight: 900; font-size: 1.1rem; margin-top: 5px; }
-        .add-btn { background: var(--primary); color: #fff; width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+        .item h3 { margin: 0; font-size: 0.95rem; font-weight: 800; color: #000; }
+        .price { color: var(--primary); font-weight: 900; font-size: 1.2rem; margin-top: 5px; }
+        .add-btn { background: var(--primary); color: #fff; width: 38px; height: 38px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
 
-        /* --- ALT BAR & NAV --- */
-        #cart-bar { position: fixed; bottom: 90px; left: 15px; right: 15px; background: var(--dark); color: #fff; padding: 15px; border-radius: 15px; display: none; justify-content: space-between; align-items: center; z-index: 3000; }
-        .nav { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; justify-content: space-around; padding: 10px 0 30px; border-top: 1px solid #eee; z-index: 4000; }
-        .nav-item { text-align: center; color: #bbb; font-size: 0.7rem; text-decoration: none; font-weight: 700; flex: 1; }
+        /* --- NAV & CART --- */
+        #cart-bar { position: fixed; bottom: 100px; left: 15px; right: 15px; background: var(--dark); color: #fff; padding: 18px; border-radius: 18px; display: none; justify-content: space-between; align-items: center; z-index: 3000; box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+        .nav { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; justify-content: space-around; padding: 15px 0 35px; border-top: 1px solid #eee; z-index: 4000; }
+        .nav-item { text-align: center; color: #bbb; font-size: 0.75rem; text-decoration: none; font-weight: 700; flex: 1; }
         .nav-item.active { color: var(--primary); }
+        .nav-item i { font-size: 1.4rem; display: block; margin-bottom: 5px; }
     </style>
 </head>
 <body>
 
     <div id="home-screen">
         <div class="top-header">
-            <img src="logo.png" class="brand-logo" alt="Logo">
-            <div class="brand-name">BATTALBEY</div>
-            <div style="font-size:0.8rem; font-weight:700;">CENGİZ TOPEL ŞUBESİ</div>
+            <img src="logo.png" class="brand-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081093.png'">
+            <h1 class="brand-name">BATTALBEY</h1>
+            <div class="branch-name">CENGİZ TOPEL ŞUBESİ</div>
         </div>
         
         <div class="section-title">MENÜ KATEGORİLERİ</div>
         <div class="grid">
             <div class="cat-card" onclick="openCat('durumler')">
-                <img src="durum.png" class="cat-main-img" alt="Dürümler">
+                <img src="durum.png" class="cat-main-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/575/575435.png'">
                 <span>DÜRÜMLER</span>
             </div>
 
             <div class="cat-card cat-card-small" onclick="openCat('porsiyonlar')">
                 <span>PORSİYONLAR</span>
-                <i class="fas fa-chevron-right" style="color:#ccc"></i>
+                <i class="fas fa-chevron-right" style="color:#eee"></i>
             </div>
 
             <div class="cat-card cat-card-small" onclick="openCat('ciger')">
                 <span>CİĞER ÇEŞİTLERİ</span>
-                <i class="fas fa-chevron-right" style="color:#ccc"></i>
+                <i class="fas fa-chevron-right" style="color:#eee"></i>
             </div>
 
             <div class="cat-card cat-card-small" onclick="openCat('ayranlar')">
                 <span>AYRANLAR</span>
-                <i class="fas fa-chevron-right" style="color:#ccc"></i>
+                <i class="fas fa-chevron-right" style="color:#eee"></i>
             </div>
 
             <div class="cat-card cat-card-small" onclick="openCat('salgamkola')">
                 <span>ŞALGAM & KOLA</span>
-                <i class="fas fa-chevron-right" style="color:#ccc"></i>
+                <i class="fas fa-chevron-right" style="color:#eee"></i>
             </div>
 
             <div class="cat-card cat-card-small" onclick="openCat('menuler')">
                 <span>EKONOMİK MENÜLER</span>
-                <i class="fas fa-chevron-right" style="color:#ccc"></i>
+                <i class="fas fa-chevron-right" style="color:#eee"></i>
             </div>
         </div>
     </div>
@@ -130,14 +134,14 @@
     </div>
 
     <div id="cart-bar">
-        <div id="cart-total" style="font-weight:900; font-size:1.2rem;">0₺</div>
-        <a href="https://wa.me/905368940942" style="color:#fff; text-decoration:none; font-weight:800; background:var(--primary); padding:8px 15px; border-radius:10px;">SİPARİŞ</a>
+        <div id="cart-total" style="font-weight:900; font-size:1.3rem;">0₺</div>
+        <a href="https://wa.me/905368940942" style="color:#fff; text-decoration:none; font-weight:800; background:var(--primary); padding:10px 20px; border-radius:12px;">SİPARİŞ VER</a>
     </div>
 
     <div class="nav">
-        <div class="nav-item active" onclick="closeCat()"><i class="fas fa-utensils"></i><br>Menü</div>
-        <a href="https://wa.me/905368940942" class="nav-item" style="color:#25d366"><i class="fab fa-whatsapp"></i><br>WhatsApp</a>
-        <a href="#" class="nav-item"><i class="fas fa-location-dot"></i><br>Konum</a>
+        <div class="nav-item active" onclick="closeCat()"><i class="fas fa-utensils"></i>Menü</div>
+        <a href="https://wa.me/905368940942" class="nav-item" style="color:#25d366"><i class="fab fa-whatsapp"></i>Sipariş</a>
+        <a href="#" class="nav-item"><i class="fas fa-location-dot"></i>Konum</a>
     </div>
 
     <script>
@@ -185,13 +189,12 @@
         function openCat(cat) {
             const list = document.getElementById('item-list');
             list.innerHTML = '';
-            let titleText = cat == 'salgamkola' ? 'ŞALGAM & KOLA' : cat.toUpperCase();
-            document.getElementById('cat-title').innerText = titleText;
+            document.getElementById('cat-title').innerText = cat == 'salgamkola' ? 'ŞALGAM & KOLA' : cat.toUpperCase();
 
             data[cat].forEach(item => {
                 list.innerHTML += `
                     <div class="item">
-                        <img src="${item.i}" alt="${item.n}">
+                        <img src="${item.i}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081093.png'">
                         <div class="item-info">
                             <h3>${item.n}</h3>
                             <div class="price">${item.p}</div>
@@ -200,12 +203,12 @@
                     </div>`;
             });
             document.getElementById('detail-screen').style.display = 'block';
-            document.body.style.overflow = 'hidden'; // Detaydayken arka plan kaymasın
+            document.body.style.overflow = 'hidden'; 
         }
 
         function closeCat() { 
             document.getElementById('detail-screen').style.display = 'none'; 
-            document.body.style.overflow = 'auto'; // Geri dönünce kaydırma başlasın
+            document.body.style.overflow = 'auto'; 
         }
 
         function add(p) {
