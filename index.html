@@ -8,70 +8,39 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root { --primary: #e60000; --bg: #fdf2f2; --card-bg: #ffffff; }
-
-        /* Mobil Sabitleme */
-        html, body { 
-            max-width: 100%; overflow-x: hidden; margin: 0; padding: 0; 
-            background-color: var(--bg); height: 100%;
-        }
+        html, body { max-width: 100%; overflow-x: hidden; margin: 0; padding: 0; background-color: var(--bg); height: 100%; }
         body { font-family: 'Montserrat', sans-serif; padding-bottom: 120px; }
 
-        /* --- HEADER (Bİ MOLA STİLİ) --- */
-        .top-header { 
-            text-align: center; padding: 40px 20px; background: #fff;
-            border-bottom-left-radius: 50px; border-bottom-right-radius: 50px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05); margin-bottom: 20px;
-        }
+        .top-header { text-align: center; padding: 40px 20px; background: #fff; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); margin-bottom: 20px; }
         .brand-logo { width: 80px; margin-bottom: 10px; border-radius: 50%; }
         .brand-name { font-size: 1.8rem; font-weight: 900; color: var(--primary); margin: 0; }
         .branch-name { font-size: 0.8rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- MENÜ GRID YAPISI (YAN YANA 2'Lİ) --- */
         .section-title { text-align: center; font-weight: 900; color: #444; margin-bottom: 20px; font-size: 1.1rem; }
-        
-        .menu-grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; /* Yan yana 2 kutu */
-            gap: 15px; 
-            padding: 0 15px; 
-        }
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 15px; }
 
-        .cat-card { 
-            background: var(--card-bg); border-radius: 25px; padding: 15px;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.04); border: 2px solid transparent;
-            transition: 0.3s; text-align: center; min-height: 160px;
-        }
+        .cat-card { background: var(--card-bg); border-radius: 25px; padding: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 8px 15px rgba(0,0,0,0.04); border: 2px solid transparent; transition: 0.3s; text-align: center; min-height: 160px; cursor: pointer; }
         .cat-card:active { transform: scale(0.95); border-color: var(--primary); }
 
-        /* Kart İçindeki Resimler (Dürüm için durum.jpg) */
-        .cat-img-wrapper {
-            width: 70px; height: 70px; border-radius: 50%; overflow: hidden;
-            margin-bottom: 12px; border: 3px solid #f9f9f9;
-        }
+        .cat-img-wrapper { width: 75px; height: 75px; border-radius: 50%; overflow: hidden; margin-bottom: 12px; border: 3px solid #f9f9f9; background: #eee; }
         .cat-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .cat-card span { font-size: 0.85rem; font-weight: 800; color: #333; line-height: 1.2; }
+        .cat-card span { font-size: 0.85rem; font-weight: 800; color: #333; }
 
-        /* --- ÜRÜN LİSTESİ EKRANI --- */
-        #detail-screen { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: #fff; z-index: 2000; overflow-y: auto;
-        }
+        #detail-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 2000; overflow-y: auto; }
         .detail-header { position: sticky; top: 0; background: #fff; padding: 20px; display: flex; align-items: center; border-bottom: 1px solid #eee; z-index: 2100; }
         .back-btn { font-size: 1.4rem; border: none; background: none; color: var(--primary); margin-right: 15px; }
         
-        .item { padding: 15px 20px; border-bottom: 1px solid #f9f9f9; display: flex; align-items: center; }
+        /* Ürün Listesi Görsel Stili */
+        .item { padding: 15px; border-bottom: 1px solid #f9f9f9; display: flex; align-items: center; }
+        .item-img { width: 65px; height: 65px; border-radius: 15px; object-fit: cover; margin-right: 15px; border: 1px solid #eee; background: #fdfdfd; }
         .item-info { flex: 1; }
-        .item h3 { margin: 0; font-size: 0.9rem; font-weight: 800; }
+        .item h3 { margin: 0; font-size: 0.9rem; font-weight: 800; color: #222; }
         .price { color: var(--primary); font-weight: 900; font-size: 1.1rem; margin-top: 4px; }
         .add-btn { background: var(--primary); color: #fff; width: 35px; height: 35px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
 
-        /* --- ALT NAV --- */
         .nav { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; justify-content: space-around; padding: 15px 0 30px; box-shadow: 0 -5px 20px rgba(0,0,0,0.05); z-index: 4000; }
         .nav-item { text-align: center; color: #bbb; font-size: 0.7rem; text-decoration: none; font-weight: 700; flex: 1; }
         .nav-item.active { color: var(--primary); }
-        .nav-item i { font-size: 1.3rem; display: block; margin-bottom: 5px; }
     </style>
 </head>
 <body>
@@ -87,44 +56,32 @@
 
         <div class="menu-grid">
             <div class="cat-card" onclick="openCat('durumler')">
-                <div class="cat-img-wrapper">
-                    <img src="durum.jpg" onerror="this.src='https://cdn-icons-png.flaticon.com/512/575/575435.png'">
-                </div>
+                <div class="cat-img-wrapper"><img src="durum.jpg"></div>
                 <span>DÜRÜMLER</span>
             </div>
 
             <div class="cat-card" onclick="openCat('porsiyonlar')">
-                <div class="cat-img-wrapper">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1046/1046751.png">
-                </div>
+                <div class="cat-img-wrapper"><img src="porsiyon.jpg"></div>
                 <span>PORSİYONLAR</span>
             </div>
 
             <div class="cat-card" onclick="openCat('ciger')">
-                <div class="cat-img-wrapper">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3595/3595469.png">
-                </div>
+                <div class="cat-img-wrapper"><img src="ciger.jpg"></div>
                 <span>CİĞER ÇEŞİTLERİ</span>
             </div>
 
             <div class="cat-card" onclick="openCat('ayranlar')">
-                <div class="cat-img-wrapper">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2405/2405479.png">
-                </div>
+                <div class="cat-img-wrapper"><img src="ayran.jpg"></div>
                 <span>AYRANLAR</span>
             </div>
 
             <div class="cat-card" onclick="openCat('salgamkola')">
-                <div class="cat-img-wrapper">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2722/2722527.png">
-                </div>
+                <div class="cat-img-wrapper"><img src="salgam.jpg"></div>
                 <span>ŞALGAM & KOLA</span>
             </div>
 
             <div class="cat-card" onclick="openCat('menuler')">
-                <div class="cat-img-wrapper">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2454/2454243.png">
-                </div>
+                <div class="cat-img-wrapper"><img src="menu.jpg"></div>
                 <span>EKONOMİK MENÜLER</span>
             </div>
         </div>
@@ -133,7 +90,7 @@
     <div id="detail-screen">
         <div class="detail-header">
             <button class="back-btn" onclick="closeCat()"><i class="fas fa-arrow-left"></i></button>
-            <span id="cat-title" style="font-weight: 900; color: #333;">KATEGORİ</span>
+            <span id="cat-title" style="font-weight: 900;">KATEGORİ</span>
         </div>
         <div id="item-list"></div>
     </div>
@@ -147,41 +104,41 @@
     <script>
         const data = {
             durumler: [
-                {n:"Öğrenci Dürüm (80g)", p:"70₺"},
-                {n:"Normal Dürüm (100g)", p:"85₺"},
-                {n:"Double Dürüm (120g)", p:"95₺"},
-                {n:"Mega Dürüm (150g)", p:"110₺"},
-                {n:"Doritoslu Normal (100g)", p:"95₺"},
-                {n:"Doritoslu Mega (150g)", p:"115₺"}
+                {n:"Öğrenci Dürüm (80g)", p:"70₺", i:"durum.jpg"},
+                {n:"Normal Dürüm (100g)", p:"85₺", i:"durum.jpg"},
+                {n:"Double Dürüm (120g)", p:"95₺", i:"durum.jpg"},
+                {n:"Mega Dürüm (150g)", p:"110₺", i:"durum.jpg"},
+                {n:"Doritoslu Normal (100g)", p:"95₺", i:"durum.jpg"},
+                {n:"Doritoslu Mega (150g)", p:"115₺", i:"durum.jpg"}
             ],
             porsiyonlar: [
-                {n:"200g Porsiyon", p:"160₺"},
-                {n:"400g Double Porsiyon", p:"230₺"},
-                {n:"Yarım Kilo Porsiyon", p:"260₺"},
-                {n:"750g Mega Porsiyon", p:"350₺"},
-                {n:"1 Kilo Tam Porsiyon", p:"475₺"},
-                {n:"1 Kilo Sade", p:"400₺"}
+                {n:"200g Porsiyon", p:"160₺", i:"porsiyon.jpg"},
+                {n:"400g Double Porsiyon", p:"230₺", i:"porsiyon.jpg"},
+                {n:"Yarım Kilo Porsiyon", p:"260₺", i:"porsiyon.jpg"},
+                {n:"750g Mega Porsiyon", p:"350₺", i:"porsiyon.jpg"},
+                {n:"1 Kilo Tam Porsiyon", p:"475₺", i:"porsiyon.jpg"},
+                {n:"1 Kilo Sade", p:"400₺", i:"porsiyon.jpg"}
             ],
             ciger: [
-                {n:"Ciğer Lavaş Dürüm", p:"100₺"},
-                {n:"Ciğer Somun Dürüm", p:"80₺"}
+                {n:"Ciğer Lavaş Dürüm", p:"100₺", i:"ciger.jpg"},
+                {n:"Ciğer Somun Dürüm", p:"80₺", i:"ciger.jpg"}
             ],
             ayranlar: [
-                {n:"Küçük Ayran", p:"20₺"},
-                {n:"Yayık Ayran", p:"20₺"},
-                {n:"Büyük Ayran (300ml)", p:"30₺"}
+                {n:"Küçük Ayran", p:"20₺", i:"ayran.jpg"},
+                {n:"Yayık Ayran", p:"20₺", i:"ayran.jpg"},
+                {n:"Büyük Ayran (300ml)", p:"30₺", i:"ayran.jpg"}
             ],
             salgamkola: [
-                {n:"Şalgam Suyu", p:"30₺"},
-                {n:"Siyah Kola", p:"40₺"},
-                {n:"Sarı Kola", p:"40₺"},
-                {n:"Su (500ml)", p:"10₺"}
+                {n:"Şalgam Suyu", p:"30₺", i:"salgam.jpg"},
+                {n:"Siyah Kola", p:"40₺", i:"kola.jpg"},
+                {n:"Sarı Kola", p:"40₺", i:"kola.jpg"},
+                {n:"Su (500ml)", p:"10₺", i:"su.jpg"}
             ],
             menuler: [
-                {n:"Dürüm (100g) + Küçük Ayran", p:"120₺"},
-                {n:"Dürüm (100g) + Kola", p:"115₺"},
-                {n:"Ciğer Lavaş + Açık Ayran", p:"110₺"},
-                {n:"Ciğer Somun + Kola", p:"110₺"}
+                {n:"Dürüm (100g) + Küçük Ayran", p:"120₺", i:"menu.jpg"},
+                {n:"Dürüm (100g) + Kola", p:"115₺", i:"menu.jpg"},
+                {n:"Ciğer Lavaş + Açık Ayran", p:"110₺", i:"menu.jpg"},
+                {n:"Ciğer Somun + Kola", p:"110₺", i:"menu.jpg"}
             ]
         };
 
@@ -193,6 +150,7 @@
             data[cat].forEach(item => {
                 list.innerHTML += `
                     <div class="item">
+                        <img src="${item.i}" class="item-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081093.png'">
                         <div class="item-info">
                             <h3>${item.n}</h3>
                             <div class="price">${item.p}</div>
@@ -201,11 +159,10 @@
                     </div>`;
             });
             document.getElementById('detail-screen').style.display = 'block';
+            window.scrollTo(0,0);
         }
 
-        function closeCat() { 
-            document.getElementById('detail-screen').style.display = 'none'; 
-        }
+        function closeCat() { document.getElementById('detail-screen').style.display = 'none'; }
     </script>
 </body>
 </html>
