@@ -12,127 +12,68 @@
             --secondary: #1a1a1a; 
             --bg: #f8f8f8; 
             --card-bg: #ffffff;
-            --accent: #27ae60;
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
         body { font-family: 'Montserrat', sans-serif; background-color: var(--bg); margin: 0; padding-bottom: 140px; color: var(--secondary); }
 
-        /* --- MODERN HEADER --- */
+        /* --- HEADER --- */
         .top-header { 
-            text-align: center; padding: 40px 20px 25px; background: #fff; 
-            border-bottom-left-radius: 30px; border-bottom-right-radius: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08); position: relative;
+            text-align: center; padding: 30px 20px; background: #fff; 
+            border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
         }
-        .brand-logo { width: 110px; height: auto; margin-bottom: 12px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
-        .brand-name { font-size: 1.8rem; font-weight: 900; color: var(--primary); text-transform: uppercase; letter-spacing: -1px; display: block; }
-        .sub-title { font-size: 0.9rem; color: #666; font-weight: 700; margin-top: 4px; display: block; opacity: 0.8; }
+        .brand-logo { width: 90px; height: auto; margin-bottom: 10px; }
+        .brand-name { font-size: 1.6rem; font-weight: 900; color: var(--primary); text-transform: uppercase; display: block; }
+        .sub-title { font-size: 0.8rem; color: #666; font-weight: 700; display: block; }
 
-        /* --- KATEGORİ SİSTEMİ --- */
-        .section-label { padding: 25px 20px 10px; font-weight: 800; font-size: 1.1rem; text-transform: uppercase; color: var(--primary); }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; padding: 0 20px; }
-        
+        /* --- GRID --- */
+        .section-label { padding: 20px; font-weight: 800; color: var(--primary); }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 20px; }
         .cat-card { 
-            background: var(--card-bg); border-radius: 24px; padding: 20px 10px; text-align: center; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.04); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(0,0,0,0.03);
+            background: var(--card-bg); border-radius: 20px; padding: 20px; text-align: center; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03); border: 1px solid #eee;
         }
-        .cat-card:active { transform: scale(0.92); background: #fff1f1; }
-        .cat-card i { font-size: 2.4rem; color: var(--primary); margin-bottom: 12px; display: block; }
-        .cat-card span { font-size: 0.8rem; font-weight: 800; color: var(--secondary); letter-spacing: 0.5px; }
+        .cat-card i { font-size: 2rem; color: var(--primary); margin-bottom: 10px; display: block; }
+        .cat-card span { font-size: 0.75rem; font-weight: 800; }
 
-        /* --- DETAY PANELİ --- */
-        #detail-screen { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: #fff; z-index: 2000; overflow-y: auto; animation: slideIn 0.4s ease-out;
-        }
-        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+        /* --- DETAY --- */
+        #detail-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 2000; overflow-y: auto; }
+        .detail-header { position: sticky; top: 0; background: #fff; padding: 15px; display: flex; align-items: center; border-bottom: 1px solid #eee; z-index: 2100; }
+        .back-btn { font-size: 1.5rem; border: none; background: none; color: var(--primary); margin-right: 15px; }
 
-        .detail-header { 
-            position: sticky; top: 0; background: #fff; color: var(--primary); padding: 20px; 
-            display: flex; align-items: center; z-index: 2100; border-bottom: 1px solid #eee;
-            font-weight: 800; font-size: 1.2rem;
-        }
-        .back-btn { font-size: 1.4rem; border: none; background: none; color: var(--primary); margin-right: 15px; cursor: pointer; }
-
-        /* --- ÜRÜN KARTLARI --- */
-        .item { 
-            padding: 15px 20px; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center;
-            transition: background 0.2s;
-        }
-        .item img { 
-            width: 100px; height: 100px; border-radius: 20px; object-fit: cover; 
-            margin-right: 18px; background: #f9f9f9; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
+        /* --- ÜRÜN --- */
+        .item { padding: 15px 20px; border-bottom: 1px solid #f5f5f5; display: flex; align-items: center; }
+        .item img { width: 80px; height: 80px; border-radius: 15px; object-fit: cover; margin-right: 15px; background: #eee; }
         .item-info { flex: 1; }
-        .item h3 { margin: 0 0 6px; font-size: 1rem; font-weight: 700; color: #111; }
-        .item p { margin: 0; font-size: 0.75rem; color: #777; line-height: 1.4; font-weight: 500; }
-        
-        .item-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
-        .price { color: var(--primary); font-weight: 900; font-size: 1.2rem; }
-        
-        .add-btn { 
-            background: var(--primary); color: #fff; width: 38px; height: 38px; 
-            border-radius: 14px; display: flex; align-items: center; justify-content: center; 
-            font-size: 1.3rem; cursor: pointer; box-shadow: 0 4px 10px rgba(192, 0, 0, 0.3);
-        }
+        .item h3 { margin: 0 0 5px; font-size: 0.9rem; font-weight: 700; }
+        .item p { margin: 0; font-size: 0.7rem; color: #888; }
+        .price { color: var(--primary); font-weight: 800; font-size: 1.1rem; margin-top: 8px; }
+        .add-btn { background: var(--primary); color: #fff; width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
 
-        /* --- ALT PANEL (SEPET) --- */
-        #cart-bar { 
-            position: fixed; bottom: 95px; left: 20px; right: 20px; 
-            background: var(--secondary); color: #fff; padding: 18px 25px; 
-            border-radius: 20px; display: none; justify-content: space-between; 
-            align-items: center; z-index: 3000; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-        }
-        
-        /* --- NAVİGASYON --- */
-        .nav { 
-            position: fixed; bottom: 0; width: 100%; background: #fff; 
-            display: flex; justify-content: space-around; padding: 15px 10px 30px; 
-            border-top: 1px solid #eee; z-index: 4000; box-shadow: 0 -5px 20px rgba(0,0,0,0.03);
-        }
-        .nav-item { text-align: center; color: #bbb; font-size: 0.75rem; text-decoration: none; font-weight: 700; flex: 1; }
+        /* --- FOOTER --- */
+        #cart-bar { position: fixed; bottom: 90px; left: 15px; right: 15px; background: var(--secondary); color: #fff; padding: 15px; border-radius: 15px; display: none; justify-content: space-between; align-items: center; z-index: 3000; }
+        .nav { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; justify-content: space-around; padding: 15px; border-top: 1px solid #eee; z-index: 4000; }
+        .nav-item { text-align: center; color: #999; font-size: 0.7rem; text-decoration: none; font-weight: 700; }
         .nav-item.active { color: var(--primary); }
-        .nav-item i { font-size: 1.4rem; display: block; margin-bottom: 6px; }
-
-        .order-btn {
-            background: #25d366; color: white !important; border-radius: 15px;
-            padding: 10px; margin-top: -10px; transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
-        }
+        .nav-item i { font-size: 1.3rem; display: block; margin-bottom: 5px; }
     </style>
 </head>
 <body>
 
     <div id="home-screen">
         <div class="top-header">
-            <img src="logo.png" alt="Battalbey Logo" class="brand-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081093.png'">
+            <img src="logo.png" class="brand-logo" onerror="this.style.display='none'">
             <span class="brand-name">BATTALBEY</span>
             <span class="sub-title">CENGİZ TOPEL ŞUBESİ</span>
         </div>
-        
-        <div class="section-label">Menü Kategorileri</div>
+        <div class="section-label">KATEGORİLER</div>
         <div class="grid">
-            <div class="cat-card" onclick="openCat('durumler')">
-                <i class="fas fa-wrapped-gift"></i>
-                <span>DÜRÜMLER</span>
-            </div>
-            <div class="cat-card" onclick="openCat('porsiyonlar')">
-                <i class="fas fa-plate-wheat"></i>
-                <span>PORSİYONLAR</span>
-            </div>
-            <div class="cat-card" onclick="openCat('ciger')">
-                <i class="fas fa-fire-alt"></i>
-                <span>CİĞER</span>
-            </div>
-            <div class="cat-card" onclick="openCat('menuler')">
-                <i class="fas fa-layer-group"></i>
-                <span>MENÜLER</span>
-            </div>
-            <div class="cat-card" onclick="openCat('icecekler')">
-                <i class="fas fa-bottle-water"></i>
-                <span>İÇECEKLER</span>
-            </div>
+            <div class="cat-card" onclick="openCat('durumler')"><i class="fas fa-wrapped-gift"></i><span>DÜRÜMLER</span></div>
+            <div class="cat-card" onclick="openCat('porsiyonlar')"><i class="fas fa-plate-wheat"></i><span>PORSİYONLAR</span></div>
+            <div class="cat-card" onclick="openCat('ciger')"><i class="fas fa-fire-alt"></i><span>CİĞER</span></div>
+            <div class="cat-card" onclick="openCat('menuler')"><i class="fas fa-layer-group"></i><span>MENÜLER</span></div>
+            <div class="cat-card" onclick="openCat('icecekler')"><i class="fas fa-bottle-water"></i><span>İÇECEKLER</span></div>
         </div>
     </div>
 
@@ -145,65 +86,57 @@
     </div>
 
     <div id="cart-bar">
-        <div>
-            <span id="cart-count" style="display:block; font-size: 0.7rem; opacity: 0.7;">0 Ürün</span>
-            <span id="cart-total" style="font-weight: 800; font-size: 1.3rem;">0₺</span>
-        </div>
-        <a href="https://wa.me/905368940942" style="color: white; text-decoration: none; font-weight: 800; background: var(--primary); padding: 10px 20px; border-radius: 12px;">SİPARİŞ VER</a>
+        <span id="cart-total" style="font-weight: 800;">0₺</span>
+        <a href="https://wa.me/905368940942" style="color:white; text-decoration:none; font-weight:800;">SİPARİŞ VER</a>
     </div>
 
     <div class="nav">
-        <div class="nav-item active" onclick="closeCat()"><i class="fas fa-list-ul"></i>Menü</div>
-        <a href="https://wa.me/905368940942" class="nav-item order-btn">
-            <i class="fab fa-whatsapp"></i>SİPARİŞ
-        </a>
-        <a href="https://maps.google.com" class="nav-item"><i class="fas fa-location-dot"></i>Konum</a>
+        <div class="nav-item active" onclick="closeCat()"><i class="fas fa-utensils"></i>Menü</div>
+        <a href="https://wa.me/905368940942" class="nav-item" style="color:#25d366"><i class="fab fa-whatsapp"></i>WhatsApp</a>
+        <a href="#" class="nav-item"><i class="fas fa-location-dot"></i>Konum</a>
     </div>
 
     <script>
         const data = {
             durumler: [
-                {n:"Öğrenci Dürüm (80g)", d:"Özel sos, marul, nane, turşu, limon", p:"70₺", i: "img/ogrenci-durum.jpg"},
-                {n:"Normal Dürüm (100g)", d:"Battalbey klasiği, taze lavaş", p:"85₺", i: "img/normal-durum.jpg"},
-                {n:"Double Dürüm (120g)", d:"Çift lavaş, bol çiğköfte lezzeti", p:"95₺", i: "img/double-durum.jpg"},
-                {n:"Mega Dürüm (150g)", d:"En doyurucu, bol malzemeli dev dürüm", p:"110₺", i: "img/mega-durum.jpg"},
-                {n:"Doritoslu Normal (100g)", d:"Çıtır Doritos Taco ve özel sos", p:"95₺", i: "img/doritos-normal.jpg"},
-                {n:"Doritoslu Mega (150g)", d:"Mega lezzet, ekstra çıtır keyif", p:"115₺", i: "img/doritos-mega.jpg"}
+                {n:"Öğrenci Dürüm (80g)", d:"Özel sos, yeşillik, turşu", p:"70₺", i: "img/durum.jpg"},
+                {n:"Normal Dürüm (100g)", d:"Battalbey klasiği", p:"85₺", i: "img/durum.jpg"},
+                {n:"Double Dürüm (120g)", d:"Çift lavaş lezzeti", p:"95₺", i: "img/durum.jpg"},
+                {n:"Mega Dürüm (150g)", d:"Doyurucu dev porsiyon", p:"110₺", i: "img/durum.jpg"},
+                {n:"Doritoslu Normal (100g)", d:"Çıtır Doritos Taco parçalı", p:"95₺", i: "img/durum.jpg"},
+                {n:"Doritoslu Mega (150g)", d:"Mega lezzet, ekstra çıtır", p:"115₺", i: "img/durum.jpg"}
             ],
             porsiyonlar: [
-                {n:"Porsiyon Çiğköfte (200g)", d:"4 adet lavaş, bol garnitür ve soslar", p:"160₺", i: "img/porsiyon-200.jpg"},
-                {n:"Double Porsiyon (400g)", d:"8 adet lavaş, geniş garnitür tabağı", p:"230₺", i: "img/porsiyon-400.jpg"},
-                {n:"Yarım Kilo Çiğköfte", d:"500g çiğköfte, tam set garnitür", p:"260₺", i: "img/yarim-kilo.jpg"},
-                {n:"Mega Porsiyon (750g)", d:"Kalabalık gruplar için ekonomik", p:"350₺", i: "img/mega-porsiyon.jpg"},
-                {n:"1 Kilo Tam Porsiyon", d:"Battalbey şöleni, tüm ekstralar dahil", p:"475₺", i: "img/bir-kilo.jpg"},
-                {n:"1 Kilo Sade (Garnitürsüz)", d:"Sadece vakumlu çiğköfte", p:"400₺", i: "img/bir-kilo-sade.jpg"}
+                {n:"Porsiyon Çiğköfte (200g)", d:"Lavaş ve garnitür ile", p:"160₺", i: "img/porsiyon.jpg"},
+                {n:"Double Porsiyon (400g)", d:"Geniş garnitür tabağı", p:"230₺", i: "img/porsiyon.jpg"},
+                {n:"Yarım Kilo Çiğköfte", d:"500g + tam garnitür", p:"260₺", i: "img/porsiyon.jpg"},
+                {n:"Mega Porsiyon (750g)", d:"Kalabalık gruplar için", p:"350₺", i: "img/porsiyon.jpg"},
+                {n:"1 Kilo Tam Porsiyon", d:"Battalbey şöleni", p:"475₺", i: "img/porsiyon.jpg"},
+                {n:"1 Kilo Sade", d:"Garnitürsüz vakumlu", p:"400₺", i: "img/porsiyon.jpg"}
             ],
             ciger: [
-                {n:"Ciğer Lavaş Dürüm", d:"100g özel baharatlı ciğer, soğanlı", p:"100₺", i: "img/ciger-lavas.jpg"},
-                {n:"Ciğer Somun Dürüm", d:"Sıcak somun ekmeğinde ciğer keyfi", p:"80₺", i: "img/ciger-somun.jpg"}
+                {n:"Ciğer Lavaş Dürüm", d:"Özel soslu ciğer", p:"100₺", i: "img/ciger.jpg"},
+                {n:"Ciğer Somun Dürüm", d:"Taze somun ekmeğinde", p:"80₺", i: "img/ciger.jpg"}
             ],
             menuler: [
-                {n:"Efsane Öğrenci Menü", d:"Normal Dürüm + Küçük Ayran", p:"120₺", i: "img/menu-ogrenci.jpg"},
-                {n:"Kola Sever Menü", d:"Normal Dürüm + Kutu Kola", p:"115₺", i: "img/menu-kola.jpg"},
-                {n:"Ciğer Lavaş Menü", d:"Lavaş Ciğer + Açık Ayran", p:"110₺", i: "img/menu-ciger.jpg"}
+                {n:"Öğrenci Menü", d:"Dürüm + Küçük Ayran", p:"120₺", i: "img/menu.jpg"},
+                {n:"Kola Menü", d:"Dürüm + Kola", p:"115₺", i: "img/menu.jpg"},
+                {n:"Ciğer Lavaş Menü", d:"Ciğer + Ayran", p:"110₺", i: "img/menu.jpg"}
             ],
             icecekler: [
-                {n:"Yayık Ayran", d:"Bol köpüklü soğuk yayık", p:"20₺", i: "img/ayran.jpg"},
-                {n:"Büyük Ayran (300ml)", d:"Sütaş/Özerhisar seçenekli", p:"30₺", i: "img/ayran-buyuk.jpg"},
-                {n:"Şalgam Suyu", d:"Doğanay Acılı / Acısız", p:"30₺", i: "img/salgam.jpg"},
-                {n:"Kutu İçecekler", d:"Kola, Fanta, Yedigün", p:"40₺", i: "img/kola.jpg"},
-                {n:"Su (500ml)", d:"Erikli / Pınar", p:"10₺", i: "img/su.jpg"}
+                {n:"Küçük/Yayık Ayran", d:"Soğuk ve taze", p:"20₺", i: "img/ayran.jpg"},
+                {n:"Büyük Ayran", d:"300ml", p:"30₺", i: "img/ayran.jpg"},
+                {n:"Şalgam Suyu", d:"Acılı/Acısız", p:"30₺", i: "img/icecek.jpg"},
+                {n:"Kola Çeşitleri", d:"Siyah/Sarı", p:"40₺", i: "img/icecek.jpg"},
+                {n:"Su", d:"500ml", p:"10₺", i: "img/su.jpg"}
             ]
         };
 
         let cartTotal = 0;
-        let cartCount = 0;
-
         function openCat(cat) {
             const list = document.getElementById('item-list');
             list.innerHTML = '';
             document.getElementById('cat-title').innerText = cat.toUpperCase();
-            
             data[cat].forEach(item => {
                 list.innerHTML += `
                     <div class="item">
@@ -211,30 +144,20 @@
                         <div class="item-info">
                             <h3>${item.n}</h3>
                             <p>${item.d}</p>
-                            <div class="item-footer">
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
                                 <div class="price">${item.p}</div>
-                                <div class="add-btn" onclick="addToCart('${item.p}')"><i class="fas fa-plus"></i></div>
+                                <div class="add-btn" onclick="addToCart('${item.p}')">+</div>
                             </div>
                         </div>
                     </div>`;
             });
             document.getElementById('detail-screen').style.display = 'block';
         }
-
-        function closeCat() { 
-            document.getElementById('detail-screen').style.display = 'none'; 
-        }
-
-        function addToCart(priceStr) {
-            let price = parseInt(priceStr.replace('₺',''));
-            cartTotal += price;
-            cartCount++;
+        function closeCat() { document.getElementById('detail-screen').style.display = 'none'; }
+        function addToCart(p) {
+            cartTotal += parseInt(p);
             document.getElementById('cart-bar').style.display = 'flex';
-            document.getElementById('cart-count').innerText = cartCount + ' Ürün Seçildi';
             document.getElementById('cart-total').innerText = cartTotal + '₺';
-            
-            // Titreşim efekti (mobil cihazlar için)
-            if (window.navigator.vibrate) window.navigator.vibrate(50);
         }
     </script>
 </body>
