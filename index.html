@@ -8,63 +8,47 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root { --primary: #e60000; --bg: #fdf2f2; --card-bg: #ffffff; }
-
-        /* Mobil Sabitleme: Yatay kaymayı engeller */
-        html, body { 
-            max-width: 100%; overflow-x: hidden; margin: 0; padding: 0; 
-            background-color: var(--bg); height: 100%;
-        }
+        html, body { max-width: 100%; overflow-x: hidden; margin: 0; padding: 0; background-color: var(--bg); height: 100%; }
         body { font-family: 'Montserrat', sans-serif; padding-bottom: 120px; }
 
-        /* --- HEADER --- */
-        .top-header { 
-            text-align: center; padding: 40px 20px; background: #fff;
-            border-bottom-left-radius: 50px; border-bottom-right-radius: 50px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05); margin-bottom: 20px;
-        }
+        .top-header { text-align: center; padding: 40px 20px; background: #fff; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); margin-bottom: 20px; }
         .brand-logo { width: 80px; margin-bottom: 10px; border-radius: 50%; }
         .brand-name { font-size: 1.8rem; font-weight: 900; color: var(--primary); margin: 0; }
         .branch-name { font-size: 0.8rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- MENÜ GRID (YAN YANA 2'Lİ) --- */
         .section-title { text-align: center; font-weight: 900; color: #444; margin-bottom: 20px; font-size: 1.1rem; }
         .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 15px; }
 
-        .cat-card { 
-            background: var(--card-bg); border-radius: 25px; padding: 15px;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.04); border: 2px solid transparent;
-            transition: 0.3s; text-align: center; min-height: 160px; cursor: pointer;
-        }
+        .cat-card { background: var(--card-bg); border-radius: 25px; padding: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 8px 15px rgba(0,0,0,0.04); border: 2px solid transparent; transition: 0.3s; text-align: center; min-height: 160px; cursor: pointer; }
         .cat-card:active { transform: scale(0.95); border-color: var(--primary); }
 
-        .cat-img-wrapper { 
-            width: 75px; height: 75px; border-radius: 50%; overflow: hidden; 
-            margin-bottom: 12px; border: 3px solid #f9f9f9; background: #eee;
-        }
+        .cat-img-wrapper { width: 75px; height: 75px; border-radius: 50%; overflow: hidden; margin-bottom: 12px; border: 3px solid #f9f9f9; background: #eee; }
         .cat-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
         .cat-card span { font-size: 0.85rem; font-weight: 800; color: #333; }
 
-        /* --- ÜRÜN DETAY EKRANI --- */
-        #detail-screen { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: #fff; z-index: 2000; overflow-y: auto; 
-        }
+        /* --- SİPARİŞ PANELİ (MODAL) --- */
+        #order-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 5000; align-items: center; justify-content: center; }
+        .modal-content { background: #fff; width: 85%; border-radius: 30px; padding: 30px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .modal-title { font-weight: 900; margin-bottom: 20px; color: #333; }
+        .order-option { display: flex; align-items: center; justify-content: center; padding: 15px; margin: 10px 0; border-radius: 15px; text-decoration: none; font-weight: 800; font-size: 1.1rem; transition: 0.2s; }
+        .opt-wp { background: #25d366; color: #fff; }
+        .opt-call { background: var(--primary); color: #fff; }
+        .close-modal { margin-top: 15px; display: inline-block; color: #888; font-weight: 700; cursor: pointer; }
+
+        #detail-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 2000; overflow-y: auto; }
         .detail-header { position: sticky; top: 0; background: #fff; padding: 20px; display: flex; align-items: center; border-bottom: 1px solid #eee; z-index: 2100; }
         .back-btn { font-size: 1.4rem; border: none; background: none; color: var(--primary); margin-right: 15px; }
         
         .item { padding: 15px; border-bottom: 1px solid #f9f9f9; display: flex; align-items: center; }
-        .item-img { width: 65px; height: 65px; border-radius: 15px; object-fit: cover; margin-right: 15px; border: 1px solid #eee; background: #fdfdfd; }
+        .item-img { width: 65px; height: 65px; border-radius: 15px; object-fit: cover; margin-right: 15px; border: 1px solid #eee; }
         .item-info { flex: 1; }
         .item h3 { margin: 0; font-size: 0.9rem; font-weight: 800; color: #222; }
         .price { color: var(--primary); font-weight: 900; font-size: 1.1rem; margin-top: 4px; }
         .add-btn { background: var(--primary); color: #fff; width: 35px; height: 35px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
 
-        /* --- ALT NAV --- */
         .nav { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; justify-content: space-around; padding: 15px 0 35px; box-shadow: 0 -5px 20px rgba(0,0,0,0.05); z-index: 4000; }
-        .nav-item { text-align: center; color: #bbb; font-size: 0.7rem; text-decoration: none; font-weight: 700; flex: 1; }
+        .nav-item { text-align: center; color: #bbb; font-size: 0.7rem; text-decoration: none; font-weight: 700; flex: 1; cursor: pointer; }
         .nav-item.active { color: var(--primary); }
-        .nav-item i { font-size: 1.3rem; display: block; margin-bottom: 5px; }
     </style>
 </head>
 <body>
@@ -83,22 +67,18 @@
                 <div class="cat-img-wrapper"><img src="durum.jpg" onerror="this.src='https://cdn-icons-png.flaticon.com/512/575/575435.png'"></div>
                 <span>DÜRÜMLER</span>
             </div>
-
             <div class="cat-card" onclick="openCat('porsiyonlar')">
                 <div class="cat-img-wrapper"><img src="porsiyon.jpg" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1046/1046751.png'"></div>
                 <span>PORSİYONLAR</span>
             </div>
-
             <div class="cat-card" onclick="openCat('ciger')">
                 <div class="cat-img-wrapper"><img src="ciger.jpg" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3595/3595469.png'"></div>
                 <span>CİĞER ÇEŞİTLERİ</span>
             </div>
-
             <div class="cat-card" onclick="openCat('icecekler')">
                 <div class="cat-img-wrapper"><img src="ayran.jpg" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2405/2405479.png'"></div>
                 <span>İÇECEKLER</span>
             </div>
-
             <div class="cat-card" onclick="openCat('menuler')">
                 <div class="cat-img-wrapper"><img src="menu.jpg" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2454/2454243.png'"></div>
                 <span>EKONOMİK MENÜLER</span>
@@ -109,22 +89,33 @@
     <div id="detail-screen">
         <div class="detail-header">
             <button class="back-btn" onclick="closeCat()"><i class="fas fa-arrow-left"></i></button>
-            <span id="cat-title" style="font-weight: 900; color: #333;">KATEGORİ</span>
+            <span id="cat-title" style="font-weight: 900;">KATEGORİ</span>
         </div>
         <div id="item-list"></div>
     </div>
 
+    <div id="order-modal" onclick="toggleOrder(false)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-title">Sipariş Yöntemi Seçin</div>
+            <a href="https://wa.me/905510078784" class="order-option opt-wp">
+                <i class="fab fa-whatsapp" style="margin-right:10px"></i> WhatsApp ile Yaz
+            </a>
+            <a href="tel:+905510078784" class="order-option opt-call">
+                <i class="fas fa-phone" style="margin-right:10px"></i> Telefon ile Ara
+            </a>
+            <div class="close-modal" onclick="toggleOrder(false)">Vazgeç</div>
+        </div>
+    </div>
+
     <div class="nav">
-        <div class="nav-item active" onclick="closeCat()"><i class="fas fa-home"></i>Anasayfa</div>
-        <a href="https://emingul484-sketch.github.io/eyl-l/?id=ANI-4687" class="nav-item" style="color:#25d366">
-            <i class="fab fa-whatsapp"></i>Sipariş
-        </a>
-        <a href="#" class="nav-item"><i class="fas fa-map-marker-alt"></i>Konum</a>
+        <div class="nav-item active" onclick="closeCat()"><i class="fas fa-home"></i><br>Anasayfa</div>
+        <div class="nav-item" style="color:#25d366" onclick="toggleOrder(true)">
+            <i class="fab fa-whatsapp"></i><br>Sipariş
+        </div>
+        <a href="#" class="nav-item"><i class="fas fa-map-marker-alt"></i><br>Konum</a>
     </div>
 
     <script>
-        const siparisLink = "https://emingul484-sketch.github.io/eyl-l/?id=ANI-4687";
-
         const data = {
             durumler: [
                 {n:"Öğrenci Dürüm (80g)", p:"70₺", i:"durum.jpg"},
@@ -163,6 +154,10 @@
             ]
         };
 
+        function toggleOrder(show) {
+            document.getElementById('order-modal').style.display = show ? 'flex' : 'none';
+        }
+
         function openCat(cat) {
             const list = document.getElementById('item-list');
             list.innerHTML = '';
@@ -176,16 +171,14 @@
                             <h3>${item.n}</h3>
                             <div class="price">${item.p}</div>
                         </div>
-                        <div class="add-btn" onclick="window.location.href='${siparisLink}'">+</div>
+                        <div class="add-btn" onclick="toggleOrder(true)">+</div>
                     </div>`;
             });
             document.getElementById('detail-screen').style.display = 'block';
             window.scrollTo(0,0);
         }
 
-        function closeCat() { 
-            document.getElementById('detail-screen').style.display = 'none'; 
-        }
+        function closeCat() { document.getElementById('detail-screen').style.display = 'none'; }
     </script>
 </body>
 </html>
